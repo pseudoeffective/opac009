@@ -1,0 +1,538 @@
+\documentclass[11pt]{amsart}
+\usepackage{mathmemo}
+\renewcommand{\memotitle}{OPAC-009 solution}
+\renewcommand{\memodate}{September 9, 2026}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+%\usepackage{amsmath,amssymb,amsthm,mathtools}
+%\usepackage[margin=1.05in]{geometry}
+%\usepackage{microtype}
+%\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xcolor}
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remark}
+%\newcommand{\R}{\mathbb R}
+\renewcommand{\C}{\mathcal C}
+\newcommand{\SP}{\mathcal{SP}}
+\newcommand{\dom}{\trianglerighteq}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\tops}{\tau}
+\newcommand{\bots}{\beta}
+\newcommand{\un}{\uplus}
+\newcommand{\coef}[2]{[\delta^{#1}]\,#2}
+
+\title[Extreme rays of the cone of log-concavity]{Extreme rays of the cone of log-concavity}
+
+\author{Claude (Fable-5.1), with ChatGPT-6 (Astra)}
+ \thanks{Directed by D.~E.~Anderson, \texttt{anderson.2804@math.osu.edu}}
+
+\date{September 9, 2026}
+\begin{document}
+\begin{abstract}
+White conjectured that a product of Schur functions indexed by partitions
+with at most two parts spans an extreme ray of the cone of log-concavity
+if and only if its factors form a nested multiset. We prove the conjecture.
+The main ingredient is a specialization of the complete homogeneous
+symmetric functions to a positive log-concave sequence. Making its
+logarithmic increments constant on an interval, and then perturbing them,
+turns a positive decomposition of Schur products into an identity between
+products of linear forms. Interval counts constrain the endpoints of
+these forms. A suitable coefficient then singles out the original nested
+multiset, with dominance supplying the final comparison when a one-part
+factor is present.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+Let $\Lambda=\R[h_1,h_2,\ldots]$ be the ring of symmetric functions,
+with $\deg h_i=i$ and $h_0=1$. For $N\ge1$, let $\SP_N$ be the set of
+multisets of nonempty partitions with at most two parts and total size $N$.
+For $A\in\SP_N$, write
+\[
+ s_A=\prod_{\rho\in A}s_\rho,
+ \qquad
+ \C_N=\operatorname{cone}\{s_A:A\in\SP_N\}\subseteq\Lambda_N.
+\]
+Jacobi--Trudi gives
+\begin{equation}\label{eq:jt}
+ s_{(a,b)}=h_ah_b-h_{a+1}h_{b-1}\quad(a\ge b\ge1),
+ \qquad s_{(c)}=h_c.
+\end{equation}
+Thus $\C_N$ is the degree-$N$ part of White's \emph{cone of
+log-concavity}. Its generators are nonnegative on every positive
+log-concave sequence $(h_i)_{i\ge0}$. The question is which of these
+generators are necessary: which products span extreme rays?
+
+We call a two-part member $(a,b)$ of $A$ a \emph{pair}, with \emph{top}
+$a$ and \emph{bottom} $b$, and a one-part member $(c)$ a
+\emph{singleton}. Following White, two members \emph{interlace} if,
+after possibly exchanging them, they are one of the following:
+\begin{enumerate}
+\item pairs $(a,b)$ and $(d,e)$ with $a>d\ge b>e$;
+\item a pair $(a,b)$ and a singleton $(c)$ with $a>b$ and $a\ge c\ge b$;
+\item two singletons.
+\end{enumerate}
+A multiset is \emph{nested} if no two of its members interlace.
+Repeated members are counted with multiplicity. In particular, a pair
+$(p,p)$ interlaces with nothing, and a nested multiset has at most one
+singleton.
+
+\begin{theorem}\label{thm:main}
+For every $N\ge1$ and $A\in\SP_N$, the product $s_A$ spans an extreme
+ray of $\C_N$ if and only if $A$ is nested.
+\end{theorem}
+
+This proves White's Conjecture~3, listed as OPAC-009 \cite{OPAC}. White proved the
+necessity of nestedness and established the converse when all the parts
+of the members of $A$ are distinct \cite[Theorems~4 and~12]{White}.
+Our proof allows arbitrary repetitions.
+
+Here is the idea. A specialization $h_k\mapsto g(k)>0$ with constant
+logarithmic increments on $[x,y+1]$ kills exactly the factors
+$s_{(a,b)}$ with $x\le b\le a\le y$. A perturbation of these increments
+replaces each vanishing factor, to first order, by a positive constant
+times $\delta_b-\delta_{a+1}$. Positivity prevents cancellation of the
+lowest powers of the perturbation parameter. Consequently, any positive
+decomposition of $s_A$ forces each competitor to have at least as many
+pairs as $A$ in every interval.
+
+These interval inequalities control the sorted lists of tops and
+bottoms. If $A$ has no singleton, the coefficient of its all-bottom
+monomial finishes the proof. If $A$ has a singleton $(c)$, nestedness
+splits its pairs into blocks below, at, and above $c$. We select the
+top endpoints below $c$ and the bottom endpoints above $c$; dominance
+then forces both blocks, and the singleton, to agree with $A$.
+
+\section{The reduction to nested competitors}
+
+For a multiset $A$, let $\phi(A)$ be the partition obtained by sorting
+all its parts. Write $\mu\dom\lambda$ for dominance order, with zeros
+appended when needed. White's Schur-support statement is
+\begin{equation}\label{eq:support}
+ s_A=\sum_{\mu\dom\phi(A)}c_A^\mu s_\mu,
+ \qquad c_A^\mu\ge0,\qquad c_A^{\phi(A)}=1
+ \quad\text{\cite[Proposition~6]{White}.}
+\end{equation}
+We use it together with White's theorem that non-nested products are
+not extreme. No result from the withdrawn paper \cite{GMTWYZ} is needed.
+
+\begin{lemma}\label{lem:distinct}
+Distinct multisets in $\SP_N$ give nonproportional products $s_A$.
+\end{lemma}
+\begin{proof}
+The polynomial $h_ah_b-h_{a+1}h_{b-1}$ is primitive and linear in
+$h_{a+1}$ over the polynomial ring in the other variables: its two
+coefficients are coprime. Gauss's lemma therefore makes it irreducible.
+The polynomials $h_c$ are also irreducible. These irreducibles are
+pairwise nonassociate: a two-part factor has largest variable index
+$a+1$, and its coefficient of that variable is $-h_{b-1}$ (or $-1$ if
+$b=1$), which determines $b$ and its normalization. A one-part factor
+cannot be associate to a two-term polynomial. Unique factorization now
+proves the assertion. All these arguments take place in a polynomial
+ring with finitely many variables for any given products.
+\end{proof}
+
+\begin{lemma}\label{lem:reduction}
+If $A$ is nested and $s_A$ does not span an extreme ray, then
+\begin{equation}\label{eq:decomp}
+ s_A=\sum_{B\in\mathcal S}c_Bs_B,
+ \qquad c_B>0,
+\end{equation}
+where $\mathcal S$ is a nonempty finite set of nested multisets
+$B\ne A$, each satisfying $\phi(B)\dom\phi(A)$.
+\end{lemma}
+\begin{proof}
+The cone $\C_N$ is finitely generated and pointed, since it lies in the
+Schur-positive cone. It is therefore generated by its extreme rays,
+each of which contains a generator $s_B$. Such a $B$ is nested by
+White's theorem and Lemma~\ref{lem:distinct}. Express $s_A$ as a
+positive combination of these generators. None is proportional to
+$s_A$, since $s_A$ is assumed not to span an extreme ray.
+Finally, the coefficient of $s_{\phi(B)}$ on the right is positive.
+There is no cancellation in the Schur basis, so
+\eqref{eq:support} forces $\phi(B)\dom\phi(A)$.
+\end{proof}
+
+\section{An interval specialization}
+
+For an integer interval $I=[x,y]$, with $1\le x\le y$, let $B_I$
+be the multiset of pairs $(a,b)\in B$ with $x\le b\le a\le y$, and set
+\[
+ n_I(B)=|B_I|,
+ \qquad
+ P_{B_I}(\delta)=\prod_{(a,b)\in B_I}(\delta_b-\delta_{a+1}).
+\]
+The variables of this polynomial are indexed by $T=[x,y+1]$.
+An empty product is $1$.
+
+\begin{lemma}[Interval degeneration]\label{lem:interval}
+Suppose \eqref{eq:decomp} holds, without requiring $A$ or the $B$'s
+to be nested. Fix $I=[x,y]$ and put $m=n_I(A)$. Then
+\begin{equation}\label{eq:count}
+ n_I(B)\ge m\qquad(B\in\mathcal S).
+\end{equation}
+Moreover, there are constants $K_A,K_B>0$, independent of $\delta$,
+such that
+\begin{equation}\label{eq:level}
+ K_AP_{A_I}(\delta)=
+ \sum_{\substack{B\in\mathcal S\\n_I(B)=m}}
+ c_BK_BP_{B_I}(\delta).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Choose a nonincreasing sequence $d^0(k)$, $k\ge1$, whose only equal
+consecutive values occur within $T$: it is constant on $T$ and strictly
+decreases at every other step. For $e=(e_k)_{k\in T}$, extended by zero
+outside $T$, set
+\[
+ d^t(k)=d^0(k)+te_k,
+ \qquad g_t(k)=\exp\left(\sum_{j=1}^k d^t(j)\right),
+ \qquad \psi_{t,e}(h_k)=g_t(k).
+\]
+Here $g_t(0)=1$, and algebraic independence of the $h_k$ makes
+$\psi_{t,e}$ a well-defined ring homomorphism. By \eqref{eq:jt},
+\begin{equation}\label{eq:factor}
+ \psi_{t,e}(s_{(a,b)})
+ =g_t(a)g_t(b)\left(1-\exp(d^t(a+1)-d^t(b))\right).
+\end{equation}
+At $t=0$ this is zero exactly when $(a,b)$ lies inside $I$; otherwise
+it is positive. For a pair inside $I$, Taylor expansion gives
+\[
+ \psi_{t,e}(s_{(a,b)})
+ =t\,g_0(a)g_0(b)(e_b-e_{a+1})+O(t^2).
+\]
+Multiplying the factors, for each fixed $e$ we obtain
+\begin{equation}\label{eq:leading}
+ \psi_{t,e}(s_B)
+ =t^{n_I(B)}K_BP_{B_I}(e)+O(t^{n_I(B)+1}),
+\end{equation}
+where
+\[
+ K_B=
+ \prod_{(a,b)\in B_I}g_0(a)g_0(b)
+ \prod_{\substack{(a,b)\in B\\(a,b)\notin B_I}}
+       \psi_{0,e}(s_{(a,b)})
+ \prod_{(c)\in B}g_0(c)>0.
+\]
+The value at $t=0$ is independent of $e$, so $K_B$ is too. Formula
+\eqref{eq:leading} remains valid when some differences $e_b-e_{a+1}$
+vanish; it does not assert an exact order of vanishing in those directions.
+
+Let $r=\min_{B\in\mathcal S}n_I(B)$. If $r<m$, choose $e_k$
+strictly decreasing on $T$. Every $P_{B_I}(e)$ is then positive.
+Apply $\psi_{t,e}$ to \eqref{eq:decomp}, divide by $t^r$, and let
+$t\to0$. The left side tends to zero, whereas the right side tends to
+$\sum_{n_I(B)=r}c_BK_BP_{B_I}(e)>0$. This proves \eqref{eq:count}.
+
+Now take arbitrary $e$, divide the specialized identity by $t^m$,
+and let $t\to0$. We get \eqref{eq:level} evaluated at $e$.
+Since this holds for every $e\in\R^T$, it is a polynomial identity.
+\end{proof}
+
+The count inequality holds for \emph{every} interval in one and the same
+decomposition. The constants in \eqref{eq:level} may change with the
+interval; no comparison between constants from different intervals is
+required.
+
+\begin{corollary}[Insertion of a rectangular pair]\label{cor:rectangle}
+If $s_D$ spans an extreme ray, then so does $s_{D\un\{(p,p)\}}$
+for every $p\ge1$.
+\end{corollary}
+\begin{proof}
+In a positive decomposition of $s_Ds_{(p,p)}$, apply
+\eqref{eq:count} with $I=[p,p]$. Every term contains $(p,p)$.
+Cancel one copy of its Schur factor in the polynomial ring.
+A decomposition using other multisets would give a decomposition of
+$s_D$ using other multisets, contrary to extremality and
+Lemma~\ref{lem:distinct}.
+\end{proof}
+
+\section{Endpoints and their monomials}
+
+For a multiset $M$ of $m$ pairs, let $\tops(M)$ and $\bots(M)$ be its
+multisets of tops and bottoms. List them increasingly as
+$a_1(M)\le\cdots\le a_m(M)$ and $b_1(M)\le\cdots\le b_m(M)$.
+Write $\wt(M)=\sum_i a_i(M)+\sum_i b_i(M)$ and
+\[
+ P_M=\prod_{(a,b)\in M}(\delta_b-\delta_{a+1}),
+ \qquad \delta^X=\prod_{v\in X}\delta_v.
+\]
+In $\delta^{\tops(M)+1}$, the $1$ is added to every member of the
+multiset $\tops(M)$.
+
+\begin{lemma}[Endpoint inequalities]\label{lem:endpoints}
+Let $D,M$ consist of $m$ pairs inside $[w,u]$. If
+$n_J(M)\ge n_J(D)$ for every subinterval $J\subseteq[w,u]$, then
+\begin{equation}\label{eq:endpoints}
+ b_i(M)\ge b_i(D),\qquad a_i(M)\le a_i(D)
+ \qquad(1\le i\le m).
+\end{equation}
+\end{lemma}
+\begin{proof}
+The intervals $[x,u]$ count bottoms at least $x$, and the intervals
+$[w,y]$ count tops at most $y$. Their inequalities are precisely the two
+coordinatewise comparisons between the increasing lists.
+\end{proof}
+
+\begin{lemma}[Endpoint monomials]\label{lem:monomials}
+Let $D,M$ consist of $m$ pairs.
+\begin{enumerate}
+\item If $\sum\bots(M)\ge\sum\bots(D)$, then
+\[
+ \coef{\bots(D)}{P_M}=
+ \begin{cases}1&\text{if }\bots(M)=\bots(D),\\0&\text{otherwise.}\end{cases}
+\]
+\item If $\sum\tops(M)\le\sum\tops(D)$, then
+\[
+ \coef{\tops(D)+1}{P_M}=
+ \begin{cases}(-1)^m&\text{if }\tops(M)=\tops(D),\\0&\text{otherwise.}\end{cases}
+\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Give $\delta_k$ weight $k$. In expanding $P_M$, choosing
+$\delta_{a+1}$ instead of $\delta_b$ strictly increases the weight,
+since $a+1>b$. Thus the unique choice of least weight selects every
+bottom; its monomial is $\delta^{\bots(M)}$, with coefficient $1$.
+Under the first hypothesis, the target has weight no greater than this
+minimum, so it can occur only as that term. The unique choice of
+greatest weight selects every top plus one and has coefficient
+$(-1)^m$. The second assertion follows in the same way. Repeated
+factors cause no difficulty, since every change of choice changes the
+weight strictly.
+\end{proof}
+
+\begin{lemma}[Reconstruction]\label{lem:reconstruction}
+A nested multiset of pairs is determined by its tops and its bottoms.
+\end{lemma}
+\begin{proof}
+Let $b$ be the largest bottom, with multiplicity $r$. We claim that the
+$r$ tops paired with $b$ are the $r$ smallest available tops at least
+$b$. Indeed, let $a^*$ be the largest top paired with $b$. If a pair
+$(a,d)$ has $d<b\le a<a^*$, then $(a^*,b)$ and $(a,d)$ interlace.
+Thus every top at least $b$ that is paired with a smaller bottom is
+at least $a^*$. This proves the claim, including ties.
+Remove the $r$ pairs just determined, and repeat. Induction reconstructs
+the entire multiset.
+\end{proof}
+
+\section{Proof of the main theorem}
+
+White's theorem proves the non-nested direction. Suppose $A$ is nested
+and $s_A$ is not extreme. Lemma~\ref{lem:reduction} gives a
+decomposition \eqref{eq:decomp} with nested $B\ne A$ and
+$\phi(B)\dom\lambda:=\phi(A)$.
+
+Let $D$ be the multiset of pairs in $A$, put $m=|D|$, and let
+$n=\ell(\lambda)$. Nestedness gives $n\in\{2m,2m+1\}$.
+Let $w$ and $u$ be the smallest and largest parts of $\lambda$,
+and put $I=[w,u]$. Dominance implies $\ell(\phi(B))\le n$:
+a partition with more than $n$ positive parts cannot dominate a
+partition of the same size with $n$ parts. Hence the interval lemma gives
+\begin{equation}\label{eq:length}
+ 2m\le2n_I(B)\le\ell(\phi(B))\le n\le2m+1.
+\end{equation}
+It follows that $B$ has exactly $m$ pairs, all inside $I$, and at most
+one singleton. Denote its pair multiset by $M_B$, and write
+\[
+ c_B'=N-\wt(M_B)\ge0.
+\]
+A positive $c_B'$ is the singleton of $B$; $c_B'=0$ means that it has
+none. If $A$ has no singleton, \eqref{eq:length} forces $c_B'=0$.
+
+For every subinterval $J\subseteq I$, Lemma~\ref{lem:interval} gives
+\begin{equation}\label{eq:allcounts}
+ n_J(M_B)\ge n_J(D).
+\end{equation}
+Its polynomial identity for $I$, after division by $K_A$, is
+\begin{equation}\label{eq:polynomial}
+ P_D=\sum_{B\in\mathcal S}\alpha_BP_{M_B},
+ \qquad \alpha_B=c_BK_B/K_A>0.
+\end{equation}
+We show that a particular coefficient on the left cannot be supplied
+by any term on the right.
+
+\subsection{No singleton}
+
+By Lemma~\ref{lem:endpoints}, the bottoms of $M_B$ are
+coordinatewise at least those of $D$, and its tops are coordinatewise
+at most those of $D$. Extract the coefficient of $\delta^{\bots(D)}$
+in \eqref{eq:polynomial}. It is $1$ on the left.
+Lemma~\ref{lem:monomials} says that a term on the right can contribute
+only if $\bots(M_B)=\bots(D)$. For such a term, equality of total
+weights gives
+\[
+ \sum\tops(M_B)=N-\sum\bots(M_B)
+                 =N-\sum\bots(D)=\sum\tops(D).
+\]
+The coordinatewise top inequalities must therefore all be equalities.
+Reconstruction gives $M_B=D$, so $B=A$, a contradiction.
+
+\subsection{A singleton}
+
+Suppose $A=D\un\{(c)\}$. Nestedness gives a disjoint splitting
+\[
+ D=D_-\un D_0\un D_+,
+\]
+where
+\[
+ D_-=\{(a,b)\in D:a<c\},\quad
+ D_0=\{(c,c)\in D\},\quad
+ D_+=\{(a,b)\in D:b>c\}.
+\]
+Write $m_-=|D_-|$, $m_0=|D_0|$, and $m_+=|D_+|$.
+Indeed, every nonrectangular pair avoids $c$, and every rectangular
+pair belongs to exactly one of these classes.
+
+Apply \eqref{eq:allcounts} to $[w,c-1]$, $[c,c]$, and $[c+1,u]$,
+omitting empty intervals. Each $M_B$ has at least $m_-$, $m_0$,
+and $m_+$ pairs in these three disjoint classes. Since their sum is
+$m$, all three counts are exact and there are no other pairs. Thus
+\begin{equation}\label{eq:split}
+ M_B=M_-\un D_0\un M_+,
+ \qquad |M_-|=m_-,\quad |M_+|=m_+.
+\end{equation}
+The notation $M_-$ and $M_+$ depends on $B$.
+Applying the endpoint lemma within each of the lower and upper
+intervals gives
+\begin{equation}\label{eq:blockendpoints}
+ \begin{aligned}
+ b_i(M_-)&\ge b_i(D_-),& a_i(M_-)&\le a_i(D_-),\\
+ b_i(M_+)&\ge b_i(D_+),& a_i(M_+)&\le a_i(D_+).
+ \end{aligned}
+\end{equation}
+
+Cancel the common nonzero polynomial
+$P_{D_0}=(\delta_c-\delta_{c+1})^{m_0}$ in
+\eqref{eq:polynomial}. This leaves
+\begin{equation}\label{eq:splitidentity}
+ P_{D_-}P_{D_+}=\sum_{B\in\mathcal S}\alpha_BP_{M_-}P_{M_+}.
+\end{equation}
+Consider the monomial
+\begin{equation}\label{eq:mixed}
+ \theta=\delta^{\tops(D_-)+1}\delta^{\bots(D_+)}.
+\end{equation}
+The lower polynomials use only variables with index at most $c$;
+the upper polynomials use only variables with index at least $c+1$.
+Their variable sets are disjoint. By Lemma~\ref{lem:monomials}, the
+coefficient of $\theta$ on the left is $(-1)^{m_-}$, and a term on the
+right has this same coefficient precisely when
+\begin{equation}\label{eq:survives}
+ \tops(M_-)=\tops(D_-),\qquad \bots(M_+)=\bots(D_+);
+\end{equation}
+otherwise its coefficient is zero. Consequently at least one
+$B\in\mathcal S$ satisfies \eqref{eq:survives}.
+
+We finish by showing that such a $B$ must be $A$. Define
+\[
+ p=\sum\bots(M_-)-\sum\bots(D_-)\ge0,
+ \qquad
+ q=\sum\tops(D_+)-\sum\tops(M_+)\ge0.
+\]
+The nonnegativity follows from \eqref{eq:blockendpoints}. Equality
+$p=0$ forces equality of the bottom multisets in the lower block;
+equality $q=0$ forces equality of the top multisets in the upper block.
+By \eqref{eq:survives},
+\begin{equation}\label{eq:weights}
+ \wt(M_-)=\wt(D_-)+p,\qquad
+ \wt(M_+)=\wt(D_+)-q,\qquad
+ c_B'=c-p+q.
+\end{equation}
+
+For the dominance comparisons, include $c_B'$ as a part even when it
+is zero. The resulting multiset $\Pi_B$ has exactly $n$ entries and
+the same total weight as $\lambda$. Dominance says that the sum of
+its $k$ largest entries is at least the corresponding sum for
+$\lambda$; equivalently, its $k$ smallest entries have sum at most
+the corresponding sum for $\lambda$.
+
+\smallskip\noindent\emph{The upper block forces $q=0$.}
+First suppose $c_B'>c$. If $m_+=0$, then $q=0$ and
+$c_B'=c-p\le c$, a contradiction. Otherwise put $r=2m_+>0$.
+The $r$ parts of $M_+$ and the entry $c_B'$ are all at least $c+1$;
+every other entry of $\Pi_B$ is at most $c$. Its $r$ largest entries
+therefore have sum at most
+\[
+ \wt(M_+)+c_B'-(c+1)
+ =\wt(D_+)-p-1<\wt(D_+).
+\]
+But the $r$ largest parts of $\lambda$ are exactly the parts of $D_+$.
+This contradicts dominance. Thus $c_B'\le c$.
+Now the $r$ largest entries of $\Pi_B$ are the parts of $M_+$,
+whose sum is $\wt(D_+)-q$. Dominance forces $q=0$.
+This conclusion also holds when $r=0$, since then both upper blocks
+are empty. We have proved $c_B'=c-p\le c$.
+
+\smallskip\noindent\emph{The lower block forces $p=0$.}
+If $m_-=0$, this is immediate. Otherwise put $s=2m_->0$ and let
+\[
+ z=\max\bigl(\{\text{parts of }M_-\}\un\{c_B'\}\bigr).
+\]
+These $s+1$ entries are at most $c$, while every other entry of
+$\Pi_B$ is at least $c$. Its $s$ smallest entries have sum
+\[
+ \wt(M_-)+c_B'-z=\wt(D_-)+c-z.
+\]
+The $s$ smallest parts of $\lambda$ have sum $\wt(D_-)$. Dominance
+therefore implies $z\ge c$. Since every part of $M_-$ is strictly
+less than $c$ and $c_B'\le c$, we obtain $c_B'=c$ and $p=0$.
+Ties at $c$, including those in $D_0$, do not change the displayed sum.
+
+All endpoint inequalities in \eqref{eq:blockendpoints} are now
+equalities, using \eqref{eq:survives}. The multisets are nested, so
+Lemma~\ref{lem:reconstruction} gives $M_-=D_-$ and $M_+=D_+$.
+Together with \eqref{eq:split} and $c_B'=c$, this yields $B=A$,
+the required contradiction. This completes the proof of
+Theorem~\ref{thm:main}. \qed
+
+\section{Further remarks}
+
+The proof uses Schur positivity and dominance to restrict a hypothetical
+decomposition, and then works entirely with Jacobi--Trudi factors.
+The interval lemma requires no nestedness. Nestedness enters in the
+bound of one singleton, the splitting around that singleton, and the
+reconstruction of pairs from their endpoints. Dominance supplies the
+length bound and the two comparisons at the end of the proof.
+
+The last comparisons cannot simply be omitted. For example,
+\[
+ A=\{(5,4),(3),(2,1)\},\qquad
+ B=\{(4,4),(4),(2,1)\}
+\]
+are nested, satisfy the interval count inequalities and the endpoint
+conditions \eqref{eq:survives}, but $\phi(B)$ does not dominate
+$\phi(A)$.
+
+The argument rules out every positive decomposition and therefore
+implies the existence of separating linear functionals by finite-dimensional
+separation. It does not supply an explicit formula for one, or prove the
+support restriction in White's Conjecture~11 on
+$[\lambda,\lambda^{++}]$ \cite{White}. For fixed $e$, Taylor coefficients
+of $\psi_{t,e}$ are linear functionals on $\Lambda_N$; understanding their
+Schur supports may help relate the present proof to that stronger question.
+The argument also gives no classification for factors with three or more
+parts: the two-part factorization \eqref{eq:factor} is essential here.
+
+\begin{thebibliography}{9}
+\bibitem{White}
+D.~E.~White, \emph{The Schur cone and the cone of log concavity},
+\href{https://arxiv.org/abs/0903.2831v2}{arXiv:0903.2831v2} (2014).
+\bibitem{GMTWYZ}
+C.~Gaetz, K.~Meyer, K.~Y.~Tam, M.~Wimberley, Z.~Yao, and H.~Zhu,
+\emph{Extreme rays of the $(N,k)$-Schur cone},
+\href{https://arxiv.org/abs/1409.4859}{arXiv:1409.4859};
+withdrawn by the authors in 2016.
+
+\bibitem{OPAC} D.~White, {\it Open Problems in Algebraic Combinatorics}, blog maintained by S.~Hopkins, \href{https://realopacblog.wordpress.com/2019/09/22/the-schur-cone-and-the-cone-of-log-concavity/}{realopacblog.wordpress.com/2019/09/22/the-schur-cone-and-the-cone-of-log-concavity/} (2019).
+
+
+
+\end{thebibliography}
+\end{document}
